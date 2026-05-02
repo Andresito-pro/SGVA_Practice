@@ -1,0 +1,59 @@
+/* Configuración General */
+body {
+    background-color: #f8f9fa;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.container {
+    max-width: 800px;
+    margin-top: 30px;
+    margin-bottom: 50px;
+}
+
+/* Tarjetas (Cards) */
+.card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    background-color: #ffffff;
+}
+
+/* Títulos */
+h2, h4 {
+    color: #343a40;
+    font-weight: 700;
+}
+
+/* Formulario */
+.form-label {
+    color: #495057;
+    margin-bottom: 0.5rem;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: #28a745;
+    box-shadow: 0 0 0 0.25 cold-rgba(40, 167, 69, 0.25);
+}
+
+/* Botón Principal */
+.btn-success {
+    background-color: #28a745;
+    border: none;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+}
+
+/* Tabla */
+.table thead {
+    background-color: #f1f3f5;
+}
+
+.badge {
+    padding: 0.5em 0.8em;
+    font-size: 0.85rem;
+    border-radius: 8px;
+}

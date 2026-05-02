@@ -1,0 +1,106 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestor de Empresas</title>
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+<div class="container">
+    <h2 class="text-center mb-4">Empresas</h2>
+
+    <!-- Tarjeta del Formulario -->
+    <div class="card p-4 mb-5">
+        <h4 class="text-center mb-4">Agregar Nueva Empresa</h4>
+        <form action="/" method="POST">
+            {% csrf_token %}
+
+            <div class="mb-3">
+                <label class="form-label fw-bold">Empresa</label>
+                <input type="text" name="empresa" class="form-control" placeholder="Nombre empresa" required>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label fw-bold">Fecha de inicio</label>
+                    <input type="date" name="fecha_inicio" class="form-control">
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label fw-bold">Fecha finalización</label>
+                    <input type="date" name="fecha_fin" class="form-control">
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-bold">Teléfono</label>
+                <input type="text" name="telefono" class="form-control" placeholder="Número de teléfono">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-bold">Correo electrónico</label>
+                <input type="email" name="correo" class="form-control" placeholder="ejemplo@correo.com">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-bold">Responsable</label>
+                <input type="text" name="responsable" class="form-control" placeholder="Nombre del encargado">
+            </div>
+
+            <div class="mb-4">
+                <label class="form-label fw-bold">Estado de interés</label>
+                <select name="estado" class="form-select">
+                    <option value="1">Respondió</option>
+                    <option value="2">No respondió</option>
+                    <option value="3">Pendiente</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-success w-100 py-2">Agregar a la lista</button>
+        </form>
+    </div>
+
+    <!-- Tabla de Resultados -->
+    <div class="card p-4">
+        <h4 class="mb-3">Lista de Contactos</h4>
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead class="table-light">
+                    <tr>
+                        <th>ID</th>
+                        <th>Empresa</th>
+                        <th>Estado</th>
+                        <th>Responsable</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for empresa in empresas %}
+                    <tr>
+                        <td class="fw-bold">{{ forloop.counter }}</td>
+                        
+                        <td>{{ empresa.nombre_empresa }}</td>
+                        <td>
+                            <span class="badge 
+                            {% if empresa.nombre_estado == 'Respondió' %} bg-success 
+                            {% elif empresa.nombre_estado == 'No respondió' %} bg-danger 
+                            {% else %} bg-secondary {% endif %}">
+                            {{ empresa.nombre_estado }}
+                            </span>
+                        </td>
+                        <td>{{ empresa.responsable }}</td>
+                    <td><button class="btn btn-sm btn-outline-primary">Editar</button></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
