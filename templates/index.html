@@ -11,13 +11,13 @@
 </head>
 <body>
 
-<div class="container">
+<div class="container py-5">
     <h2 class="text-center mb-4">Empresas</h2>
 
     <!-- Tarjeta del Formulario -->
-    <div class="card p-4 mb-5">
+    <div class="card p-4 mb-5 shadow-sm">
         <h4 class="text-center mb-4">Agregar Nueva Empresa</h4>
-        <form action="/" method="POST">
+        <form action="{% url 'index' %}" method="POST">
             {% csrf_token %}
 
             <div class="mb-3">
@@ -65,7 +65,7 @@
     </div>
 
     <!-- Tabla de Resultados -->
-    <div class="card p-4">
+    <div class="card p-4 shadow-sm">
         <h4 class="mb-3">Lista de Contactos</h4>
         <div class="table-responsive">
             <table class="table table-hover">
@@ -82,18 +82,28 @@
                     {% for empresa in empresas %}
                     <tr>
                         <td class="fw-bold">{{ forloop.counter }}</td>
-                        
                         <td>{{ empresa.nombre_empresa }}</td>
                         <td>
                             <span class="badge 
                             {% if empresa.estado.nombre_estado == 'Respondió' %} bg-success 
                             {% elif empresa.estado.nombre_estado == 'No respondió' %} bg-danger 
                             {% else %} bg-secondary {% endif %}">
-                            {{ empresa.estado.nombre_estado }}
+                                {{ empresa.estado.nombre_estado }}
                             </span>
                         </td>
                         <td>{{ empresa.responsable }}</td>
-                    <td><button class="btn btn-sm btn-outline-primary">Editar</button></td>
+                        <td>
+                            <button class="btn btn-sm btn-outline-primary">Editar</button>
+                            <a href="{% url 'eliminar_empresa' empresa.id %}" 
+                                class="btn btn-sm btn-outline-danger" 
+                                onclick="return confirm('¿Estás seguro de eliminar esta empresa?')">
+                                Eliminar
+                            </a>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="5" class="text-center text-muted">No hay empresas registradas aún.</td>
                     </tr>
                     {% endfor %}
                 </tbody>
