@@ -86,10 +86,10 @@
                         <td>{{ empresa.nombre_empresa }}</td>
                         <td>
                             <span class="badge 
-                            {% if empresa.nombre_estado == 'Respondió' %} bg-success 
-                            {% elif empresa.nombre_estado == 'No respondió' %} bg-danger 
+                            {% if empresa.estado.nombre_estado == 'Respondió' %} bg-success 
+                            {% elif empresa.estado.nombre_estado == 'No respondió' %} bg-danger 
                             {% else %} bg-secondary {% endif %}">
-                            {{ empresa.nombre_estado }}
+                            {{ empresa.estado.nombre_estado }}
                             </span>
                         </td>
                         <td>{{ empresa.responsable }}</td>
