@@ -1,13 +1,14 @@
 import os
 from pathlib import Path
+from decouple import config
 
 # Construye las rutas dentro del proyecto
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SEGURIDAD: Mantén esta clave en secreto en producción
-SECRET_KEY = 'django-insecure-tu-clave-aqui'
+SECRET_KEY = config('SECRET_KEY')
 
-DEBUG = True  # Cambiar a False cuando despliegues en Render
+DEBUG = config('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = ['*'] # Permite que Codespaces y Render lo visualicen
 
@@ -58,14 +59,15 @@ WSGI_APPLICATION = 'sgva_practice.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'sgva_practice_db',
-        'USER': 'root',
-        'PASSWORD': 'admin123', 
-        'HOST': '127.0.0.1',
-        'PORT': '3306',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': config('DB_NAME'),
+        'USER': config('DB_USER'),
+        'PASSWORD': config('DB_PASSWORD'),
+        'HOST': config('DB_HOST'),
+        'PORT': config('DB_PORT'),
     }
 }
+
 
 # Internacionalización
 LANGUAGE_CODE = 'es-co' # Español de Colombia

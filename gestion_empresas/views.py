@@ -36,3 +36,11 @@ def gestor_empresas(request):
     # Si es GET, consultamos todas las empresas
     empresas = Empresa.objects.all().select_related('estado')
     return render(request, 'index.html', {'empresas': empresas})
+
+
+from django.shortcuts import get_object_or_404
+
+def eliminar_empresa(request, id):
+    empresa = get_object_or_404(Empresa, id=id)
+    empresa.delete()
+    return redirect('index')
